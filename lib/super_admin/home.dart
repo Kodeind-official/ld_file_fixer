@@ -43,18 +43,7 @@ class _HomePageSPAState extends State<HomePageSPA> {
   Timer? _debounce;
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   _loadUserInfo();
-  //   final yesterday = DateTime.now().subtract(
-  //       Duration(days: 1)); // Mengurangi satu hari dari tanggal sekarang
-  //   final startOfYesterday =
-  //       DateTime(yesterday.year, yesterday.month, yesterday.day);
-  //   final endOfYesterday =
-  //       DateTime(yesterday.year, yesterday.month, yesterday.day, 23, 59, 59);
-  //   _filterByDateRange(startOfYesterday, endOfYesterday);
-  // }
-
+  
   void initState() {
     super.initState();
     _loadUserInfo();
@@ -142,32 +131,7 @@ class _HomePageSPAState extends State<HomePageSPA> {
     await prefs.remove('tanggal_upload_hari_ini');
     await prefs.remove('deskripsi_status');
   }
-
-// Fungsi untuk mengirim notifikasi
-  // Future<void> sendNotificationWithData(CustomImageInfo selectedImage) async {
-  //   // Implementasikan logika untuk mengirim notifikasi
-  //   // Contoh dengan menggunakan firebase_messaging
-  //   await FirebaseMessaging.instance.sendMessage(
-  //     data: {
-  //       'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-  //       'image_id': selectedImage.id,
-  //       'user_id_login': selectedImage.userIdLogin,
-  //       'file_path': selectedImage.filePath,
-  //       'upload_date_ori': selectedImage.uploadDateOri,
-  //       'upload_date': selectedImage.uploadDate,
-  //       'upload_date_2': selectedImage.uploadDate2,
-  //       'company_name': selectedImage.companyName,
-  //       'status_img': selectedImage.statusIMG,
-  //       'deskripsi': selectedImage.deskripsi,
-  //       'username': selectedImage.username,
-  //       'status_read_vendor': selectedImage.statusReadVendor,
-  //       'status_read_admin': selectedImage.statusReadAdmin,
-  //       'tanggal_upload_hari_ini': selectedImage.tanggal_upload_hari_ini,
-  //       'deskripsi_status': selectedImage.deskripsi_status,
-  //     },
-  //   );
-  // }
-
+  
   Future<List<CustomImageInfo>> fetchImagesByDateRange(
       DateTime start, DateTime end) async {
     // Mengambil gambar berdasarkan tanggal unggah dalam rentang tertentu
@@ -200,7 +164,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
 
   Future<List<CustomImageInfo>> fetchImages() async {
     final response = await http.get(Uri.parse(
-        // 'https://menuku.id/flutter/validasifoto/App_File_Fixer/get_images.php'));
         // 'https://api.verification.lifetimedesign.id/App/Validasi/App_FileFixer/dummy_get_images.php'));
 
         'https://api.verification.lifetimedesign.id/App/Validasi/App_FileFixer/dummy_get_images.php'));
@@ -357,110 +320,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
     // }
   }
 
-  // Future<void> updateImageStatus(String id, String newStatus,
-  //     {Function()? onSubmit}) async {
-  //   if (newStatus == 'Rejected') {
-  //     showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         TextEditingController deskripsiController = TextEditingController();
-  //         bool localIsLoading = false;
-
-  //         return StatefulBuilder(
-  //           builder: (BuildContext context, StateSetter setState) {
-  //             return AlertDialog(
-  //               backgroundColor: colorSet.mainGold,
-  //               shape: RoundedRectangleBorder(
-  //                 side: BorderSide(color: colorSet.listTile2, width: 2),
-  //                 borderRadius: BorderRadius.circular(10),
-  //               ),
-  //               title:
-  //                   Text("Rejected", style: TextStyle(color: colorSet.mainBG)),
-  //               content: TextField(
-  //                 controller: deskripsiController,
-  //                 decoration: InputDecoration(
-  //                   fillColor: colorSet.listTile2,
-  //                   filled: true,
-  //                   hintText: "Deskripsi",
-  //                   labelStyle: TextStyle(color: Colors.black),
-  //                   focusedBorder: OutlineInputBorder(
-  //                     borderSide: BorderSide(color: colorSet.listTile1),
-  //                   ),
-  //                   enabledBorder: OutlineInputBorder(
-  //                     borderSide: BorderSide(color: colorSet.listTile1),
-  //                   ),
-  //                 ),
-  //                 cursorColor: Colors.black,
-  //               ),
-  //               actions: [
-  //                 TextButton(
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                   },
-  //                   child: Container(
-  //                     width: 90,
-  //                     height: 40,
-  //                     decoration: BoxDecoration(
-  //                       borderRadius: BorderRadius.circular(8),
-  //                       color: colorSet.listTile2,
-  //                     ),
-  //                     child: Center(
-  //                       child: Text(
-  //                         "Cancel",
-  //                         style: TextStyle(color: colorSet.mainBG),
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 TextButton(
-  //                   onPressed: () async {
-  //                     setState(() {
-  //                       localIsLoading = true;
-  //                     });
-
-  //                     await _updateImageStatusWithDescription(
-  //                         id, newStatus, deskripsiController.text);
-
-  //                     if (mounted) {
-  //                       Navigator.pop(context);
-  //                       if (onSubmit != null) onSubmit();
-  //                     }
-
-  //                     setState(() {
-  //                       localIsLoading = false;
-  //                     });
-  //                   },
-  //                   child: Container(
-  //                     width: 90,
-  //                     height: 40,
-  //                     decoration: BoxDecoration(
-  //                       borderRadius: BorderRadius.circular(8),
-  //                       color: colorSet.mainBG,
-  //                     ),
-  //                     child: Center(
-  //                       child: localIsLoading
-  //                           ? CircularProgressIndicator(
-  //                               valueColor: AlwaysStoppedAnimation<Color>(
-  //                                   colorSet.mainGold),
-  //                             )
-  //                           : Text(
-  //                               "Submit",
-  //                               style: TextStyle(color: colorSet.mainGold),
-  //                             ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             );
-  //           },
-  //         );
-  //       },
-  //     );
-  //   } else {
-  //     await _updateImageStatusWithDescription(id, newStatus, "");
-  //     if (onSubmit != null) onSubmit();
-  //   }
-  // }
 
   Future<void> updateImageStatus(
       String id, String newStatus, List<CustomImageInfo> snapshot,
@@ -710,7 +569,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
       String id, String newStatus, String deskripsi) async {
     final response = await http.post(
       Uri.parse(
-          // 'https://menuku.id/flutter/validasifoto/update_status_nota_FileFixer.php'),
           // 'https://api.verification.lifetimedesign.id/dummy_update_status_nota_FileFixer.php'),
 
           'https://api.verification.lifetimedesign.id/update_status_nota_FileFixer.php'),
@@ -729,7 +587,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
       try {
         final userIdResponse = await http.post(
           Uri.parse(
-              // 'https://menuku.id/flutter/validasifoto/App_File_Fixer/get_userid_from_validasi.php'),
 
               'https://api.verification.lifetimedesign.id/App/Validasi/App_FileFixer/get_userid_from_validasi.php'),
           body: {
@@ -781,7 +638,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
     try {
       final userInfoResponse = await http.post(
         Uri.parse(
-            // 'https://menuku.id/flutter/validasifoto/App_File_Fixer/get_user_info.php'),
             'https://api.verification.lifetimedesign.id/App/Validasi/App_FileFixer/get_user_info.php'),
         body: {
           'userId': userId.toString(),
@@ -821,23 +677,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
     });
   }
 
-  // void _handleFilterSelection(String? selectedValue) {
-  //   setState(() {
-  //     if (selectedValue == 'Approved') {
-  //       // Fetch all images with status 'Approved'
-  //       _futureImages = fetchImages().then((images) {
-  //         // Sort the images by upload date
-  //         images.sort((a, b) => b.uploadDate.compareTo(a.uploadDate));
-  //         // Take the latest 15 images
-  //         final latestApprovedImages = images.take(30).toList();
-  //         return Future.value(latestApprovedImages);
-  //       });
-  //     } else {
-  //       // For other filter values, fetch all images
-  //       _futureImages = fetchImages();
-  //     }
-  //   });
-  // }
 
   Future<void> _loadUserInfo() async {
     final prefs = await SharedPreferences.getInstance();
@@ -908,24 +747,7 @@ class _HomePageSPAState extends State<HomePageSPA> {
     );
   }
 
-  // Future<void> _selectDateRange(BuildContext context) async {
-  //   final DateTimeRange? picked = await showDateRangePicker(
-  //     context: context,
-  //     firstDate: DateTime(2020),
-  //     lastDate: DateTime(9999),
-  //     initialDateRange: DateTimeRange(
-  //       start: _selectedStartDate,
-  //       end: _selectedEndDate,
-  //     ),
-  //   );
-  //   if (picked != null) {
-  //     setState(() {
-  //       _selectedStartDate = picked.start;
-  //       _selectedEndDate = picked.end;
-  //     });
-  //     _filterByDateRange(picked.start, picked.end);
-  //   }
-  // }
+
 
   void _selectDateRange(BuildContext context) async {
     final DateTimeRange? picked = await showDateRangePicker(
@@ -1132,7 +954,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
   Future<void> updateStatusReadAdmin(String imageId) async {
     // Buat permintaan HTTP untuk memperbarui statusReadAdmin menjadi "true"
     final url = Uri.parse(
-        // 'https://menuku.id/flutter/validasifoto/App_File_Fixer/update_status_read.php');
         // 'https://api.verification.lifetimedesign.id/App/Validasi/App_FileFixer/dummy_update_status_read.php');
 
         'https://api.verification.lifetimedesign.id/App/Validasi/App_FileFixer/update_status_read.php');
@@ -1297,7 +1118,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
                                             builder: (context) =>
                                                 FullScreenImagePage(
                                               imageUrls: [
-                                                // 'https://menuku.id/flutter/validasifoto/${imageInfo.filePath}',
 
                                                 'https://api.verification.lifetimedesign.id/${imageInfo.filePath}',
                                               ],
@@ -1316,7 +1136,6 @@ class _HomePageSPAState extends State<HomePageSPA> {
                                             60, // Adjust the radius to make the CircleAvatar bigger
                                         child: ClipOval(
                                           child: Image.network(
-                                            // 'https://menuku.id/flutter/validasifoto/${imageInfo.filePath}',
 
                                             'https://api.verification.lifetimedesign.id/${imageInfo.filePath}',
                                             width:

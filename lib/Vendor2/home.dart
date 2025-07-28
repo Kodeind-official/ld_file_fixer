@@ -39,18 +39,6 @@ class _HomePageVendor2State extends State<HomePageVendor2> {
   Timer? _debounce;
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   _loadUserInfo();
-  //   final yesterday = DateTime.now().subtract(
-  //       Duration(days: 1)); // Mengurangi satu hari dari tanggal sekarang
-  //   final startOfYesterday =
-  //       DateTime(yesterday.year, yesterday.month, yesterday.day);
-  //   final endOfYesterday =
-  //       DateTime(yesterday.year, yesterday.month, yesterday.day, 23, 59, 59);
-  //   _filterByDateRange(startOfYesterday, endOfYesterday);
-  //   _checkUser();
-  // }
 
 
 void initState() {
@@ -87,23 +75,6 @@ Future<List<CustomImageInfo>> fetchImagesByDateRange(DateTime start, DateTime en
     return uploadDate.isAfter(start) && uploadDate.isBefore(end);
   }).toList();
 }
-  Future<void> _checkUser() async {
-    final response = await http
-        .get(Uri.parse('https://menuku.id/flutter/validasifoto/testing.php'));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data['exists'] == false) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => TemporaryPage()),
-        );
-      }
-    } else {
-      // Handle server error
-      print('Failed to check user');
-    }
-  }
 
   Future<void> _refreshImages() async {
     if (!mounted) return;
@@ -446,19 +417,6 @@ Future<List<CustomImageInfo>> fetchImagesByDateRange(DateTime start, DateTime en
     });
   }
 
-// void _handleFilterSelection2(String? selectedValue) {
-//     setState(() {
-//       _futureImages = fetchImages().then((images) {
-//         // Jika selectedValue tidak null, filter gambar berdasarkan status
-//         if (selectedValue != null && selectedValue.isNotEmpty) {
-//           images =
-//               images.where((image) => image.status == selectedValue).toList();
-//         }
-//         return Future.value(images);
-//       });
-//     });
-//   }
-
   void _handleFilterSelection(String? selectedValue) {
     setState(() {
       if (selectedValue == 'Approved') {
@@ -632,17 +590,6 @@ Future<List<CustomImageInfo>> fetchImagesByDateRange(DateTime start, DateTime en
     }
   }
 
-  // List<CustomImageInfo> _filteredList(List<CustomImageInfo>? data) {
-  //   if (data == null || data.isEmpty || _searchText.isEmpty) {
-  //     return data ?? [];
-  //   } else {
-  //     return data
-  //         .where((imageInfo) => imageInfo.uploadDateOri
-  //             .toLowerCase()
-  //             .contains(_searchText.toLowerCase()))
-  //         .toList();
-  //   }
-  // }
 
   List<CustomImageInfo> _filteredList(List<CustomImageInfo>? data) {
     if (data == null || data.isEmpty) {
@@ -662,91 +609,7 @@ Future<List<CustomImageInfo>> fetchImagesByDateRange(DateTime start, DateTime en
     }
   }
 
-  // Future<void> _deleteImage(CustomImageInfo imageInfo) async {
-  //   try {
-  //     final response = await http.post(
-  //       Uri.parse(
-  //           'https://api.verification.lifetimedesign.id/App/Validasi/App_FileFixer/delete_image.php'),
-  //       body: {
-  //         'id': imageInfo.id.toString(),
-  //       },
-  //     );
-  //     if (response.statusCode == 200) {
-  //       print('Image deleted successfully');
-  //       // Tampilkan Snackbar untuk memberi tahu pengguna bahwa gambar telah dihapus
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(
-  //           content: Text('Image deleted successfully'),
-  //           backgroundColor: Colors.green, // Atur warna latar belakang Snackbar
-  //         ),
-  //       );
-  //       // Setelah gambar dihapus, Anda mungkin perlu memperbarui daftar gambar dengan memanggil fungsi _refreshImages
-  //       _refreshImages();
-  //     } else {
-  //       print('Failed to delete image. Status code: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     print('Error deleting image: $e');
-  //   }
-  // }
-
-  // void _showDeleteConfirmationDialog(
-  //     BuildContext context, CustomImageInfo imageInfo) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         backgroundColor: colorSet.mainGold,
-  //         shape: RoundedRectangleBorder(
-  //           side: BorderSide(color: colorSet.listTile2, width: 2),
-  //           borderRadius: BorderRadius.circular(10),
-  //         ),
-  //         title: Text("Delete Image"),
-  //         content: Text("Are you sure you want to delete this image?"),
-  //         actions: <Widget>[
-  //           TextButton(
-  //             onPressed: () {
-  //               Navigator.of(context).pop(); // Tutup dialog
-  //             },
-  //             child: Container(
-  //               width: 90,
-  //               height: 40,
-  //               decoration: BoxDecoration(
-  //                 borderRadius: BorderRadius.circular(8),
-  //                 color: colorSet.listTile2,
-  //               ),
-  //               child: Center(
-  //                 child: Text(
-  //                   "Cancel",
-  //                   style: TextStyle(color: colorSet.mainBG),
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //           TextButton(
-  //             onPressed: () {
-  //               // Panggil fungsi untuk menghapus gambar
-  //               _deleteImage(imageInfo);
-  //               Navigator.of(context).pop(); // Tutup dialog
-  //             },
-  //             child: Container(
-  //                 width: 90,
-  //                 height: 40,
-  //                 decoration: BoxDecoration(
-  //                   borderRadius: BorderRadius.circular(8),
-  //                   color: colorSet.mainBG,
-  //                 ),
-  //                 child: Center(
-  //                     child: Text(
-  //                   "Yes",
-  //                   style: TextStyle(color: colorSet.mainGold),
-  //                 ))),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+  
 
   @override
   Widget build(BuildContext context) {

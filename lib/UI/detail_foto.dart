@@ -88,55 +88,6 @@ class _FullScreenImagePage2State extends State<FullScreenImagePage2> {
   }
 }
 
-// class FullScreenImagePageResult extends StatefulWidget {
-//   final List<String> imageUrls;
-//   final int initialIndex;
-
-//   FullScreenImagePageResult({required this.imageUrls, this.initialIndex = 0});
-
-//   @override
-//   State<FullScreenImagePageResult> createState() => _FullScreenImagePageResultState();
-// }
-
-// class _FullScreenImagePageResultState extends State<FullScreenImagePageResult> {
-//   late PageController _pageController;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _pageController = PageController(initialPage: widget.initialIndex);
-//   }
-
-//   @override
-//   void dispose() {
-//     _pageController.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Full Screen Image'),
-//       ),
-//       body: PhotoViewGallery.builder(
-//         itemCount: widget.imageUrls.length,
-//         builder: (context, index) {
-//           return PhotoViewGalleryPageOptions(
-//             imageProvider: NetworkImage(widget.imageUrls[index]),
-//             minScale: PhotoViewComputedScale.contained * 0.8,
-//             maxScale: PhotoViewComputedScale.covered * 2,
-//           );
-//         },
-//         scrollPhysics: BouncingScrollPhysics(),
-//         backgroundDecoration: BoxDecoration(
-//           color: Colors.black,
-//         ),
-//         pageController: _pageController,
-//       ),
-//     );
-//   }
-// }
 
 class FullScreenImagePageResult extends StatefulWidget {
   final List<String> imageUrls;

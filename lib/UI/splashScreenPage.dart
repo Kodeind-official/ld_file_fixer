@@ -29,7 +29,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       () => _checkLoginStatus(context)
     );
    _printFCMToken();
-   _checkUser;
   }
 
    void _printFCMToken() async {
@@ -129,28 +128,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       ),
     );
   }
-
-    Future<void> _checkUser() async {
-    final response = await http.get(Uri.parse('https://menuku.id/flutter/validasifoto/testing.php'));
-    
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data['exists'] == true) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => SplashScreenPage()),
-        );
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => TemporaryPage()),
-        );
-      }
-    } else {
-      // Handle server error
-      print('Failed to check user');
-    }
-  }
   
   void _checkLoginStatus(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
@@ -203,29 +180,3 @@ Future<String?> _fetchUserStatusFromDB(int userId) async {
   }
 }
 }
-
-//   void _checkLoginStatus(BuildContext context) async {
-//     final prefs = await SharedPreferences.getInstance();
-//     final userId = prefs.getInt('userId');
-//     final userStatus = prefs.getString('status');
-
-//     if (userId != null && userStatus != null) {
-//     // Pengecekan status pengguna
-//     if (userStatus == 'vendor') {
-//       // Jika status pengguna adalah 'vendor', navigasikan ke halaman Home Vendor
-//       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageVendor()));
-//     } else if (userStatus == 'procurement') {
-//       // Jika status pengguna adalah 'procurement', navigasikan ke halaman Home Procurement
-//       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageSPA())); // Ganti dengan halaman Home Procurement yang sesuai
-//     } else if (userStatus == 'super admin') {
-//       // Jika status pengguna adalah 'super admin', navigasikan ke halaman Home Super Admin
-//       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageSPA())); // Ganti dengan halaman Home Super Admin yang sesuai
-//     } else {
-//       // Jika status tidak dikenali, tampilkan pesan kesalahan
-//        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-//     }
-//   } else {
-//     // Pengguna belum pernah login, tampilkan halaman login
-//     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-//   }
-// }}
